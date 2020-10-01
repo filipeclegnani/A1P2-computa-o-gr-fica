@@ -73,8 +73,6 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 			
 		case WM_PAINT:
 			draw();
-			BeginPaint(hwnd, &ps);
-			EndPaint(hwnd, &ps);
 			break;
 			
 		case WM_SIZE:
