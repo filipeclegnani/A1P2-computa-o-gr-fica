@@ -1,7 +1,9 @@
 #include <windows.h>
 #include <wingdi.h>
 #include <gl/gl.h>
-#include <gl/glu.h>
+
+#include "janela.h"
+#include "formas.h"
 
 void draw();
 
@@ -70,7 +72,6 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 			break;
 			
 		case WM_PAINT:
-			draw();
 			break;
 			
 		case WM_SIZE:
@@ -89,6 +90,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
 
 void draw(){
+	// desenha triangulo
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_TRIANGLES);
 	glColor3f(0.0f, 0.0f, 0.0f);
