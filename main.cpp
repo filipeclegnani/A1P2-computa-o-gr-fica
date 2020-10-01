@@ -63,8 +63,6 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 
 LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
-	PAINTSTRUCT ps;
-	HDC dc;
 
 	switch (msg) {
 
