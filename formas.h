@@ -5,20 +5,46 @@
 
 HWND caixa_de_formas;
 
-void ConstroiCFormas(HWND hwnd){
+int ConstroiCFormas(HWND hwnd){
 	caixa_de_formas = CreateWindow(
 		"STATIC",
-		"formas",
+		"Fórmas",
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
-	    100,		// posição x
-	    100,		// posição y
-	    300,	// tamanho x
-	    200,	// tamanho y
+	    X_WINDOWSIZE / 3,		// posição x
+	    0,		// posição y
+	    (X_WINDOWSIZE / 3)*2,	// tamanho x
+	    Y_WINDOWSIZE,	// tamanho y
 	    hwnd,
 	    (HMENU)0,
 	    NULL,
 	    NULL
 	);
+	
+	
+	HDC dc;
+	dc = GetDC(caixa_de_formas);
+	PIXELFORMATDESCRIPTOR pfd;
+	pfd.nSize = sizeof(pfd);
+	pfd.nVersion = 1;
+	pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL;
+	pfd.iPixelType = PFD_TYPE_RGBA;
+	pfd.cColorBits = 32;
+	
+	int pf = ChoosePixelFormat(dc, &pfd);
+	if(pf == 0){
+		MessageBox(NULL,"ChoosePixelFormat(dc, &pfd);","ERRO",MB_OK);
+		return GetLastError();
+	}
+	if(SetPixelFormat(dc, pf, &pfd) == FALSE){
+		MessageBox(NULL, "SetPixelFormat(dc, pf, &pfd)", "ERRO", MB_OK);
+		return GetLastError();
+	}
+	DescribePixelFormat(dc, pf, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
+	
+	HGLRC hRC;
+	hRC = wglCreateContext(dc);
+	wglMakeCurrent(dc, hRC);
+	return 0;
 }
 
 void formasResize(HWND hwnd, LPARAM lp){

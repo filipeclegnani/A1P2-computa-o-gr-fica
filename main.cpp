@@ -2,8 +2,12 @@
 #include <wingdi.h>
 #include <gl/gl.h>
 
+#define X_WINDOWSIZE 800
+#define Y_WINDOWSIZE 600
+
 #include "janela.h"
 #include "formas.h"
+
 
 void draw();
 
@@ -24,36 +28,18 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	                wc.lpszClassName,
 	                "Formas",
 	                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-	                0, 0, 800, 600,
+	                0, 
+					0, 
+					800, 
+					600,
 	                NULL, NULL, NULL, NULL
 	            );
-	HDC dc;
-	// criar window das formas e trocar o hwnd
-	ConstroiCFormas(hwnd);
-	dc = GetDC(caixa_de_formas);
-	PIXELFORMATDESCRIPTOR pfd;
-	pfd.nSize = sizeof(pfd);
-	pfd.nVersion = 1;
-	pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL;
-	pfd.iPixelType = PFD_TYPE_RGBA;
-	pfd.cColorBits = 32;
+	//if(int i = ConstroiCFormas(hwnd)){
+	//	return i;
+	//}else{
+	//	ShowWindow(hwnd, ncmdshow);
+	//}
 	
-	int pf = ChoosePixelFormat(dc, &pfd);
-	if(pf == 0){
-		MessageBox(NULL,"ChoosePixelFormat(dc, &pfd);","ERRO",MB_OK);
-		return 0;
-	}
-	if(SetPixelFormat(dc, pf, &pfd) == FALSE){
-		MessageBox(NULL, "SetPixelFormat(dc, pf, &pfd)", "ERRO", MB_OK);
-		return GetLastError();
-	}
-	DescribePixelFormat(dc, pf, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
-	
-	HGLRC hRC;
-	hRC = wglCreateContext(dc);
-	wglMakeCurrent(dc, hRC);
-	
-	ShowWindow(hwnd, ncmdshow);
 	
 	MSG msg = {};
 
@@ -67,20 +53,20 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 
 LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
-
 	switch (msg) {
 
 		case WM_CREATE:
 			ConstroiBotoes(hwnd);
-			formasResize(hwnd, lp);
+			//formasResize(hwnd, lp);
 			break;
 			
+		
 		case WM_PAINT:
-			draw();
+			//draw();
 			break;
 			
 		case WM_SIZE:
-			janelaResize(hwnd, lp);
+			//janelaResize(hwnd, lp);
 			formasResize(hwnd, lp);
 			PostMessage(hwnd, WM_PAINT, 0, 0);
 			break;
