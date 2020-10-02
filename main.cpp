@@ -29,7 +29,8 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	            );
 	HDC dc;
 	// criar window das formas e trocar o hwnd
-	dc = GetDC(hwnd);
+	ConstroiCFormas(hwnd);
+	dc = GetDC(caixa_de_formas);
 	PIXELFORMATDESCRIPTOR pfd;
 	pfd.nSize = sizeof(pfd);
 	pfd.nVersion = 1;
@@ -71,17 +72,17 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
 		case WM_CREATE:
 			ConstroiBotoes(hwnd);
-			ConstroiBotoes(hwnd);
+			formasResize(hwnd, lp);
 			break;
 			
 		case WM_PAINT:
-			//draw();
+			draw();
 			break;
 			
 		case WM_SIZE:
-			glViewport(0, 0, LOWORD(lp), HIWORD(lp));
-			PostMessage(hwnd, WM_PAINT, 0, 0);
 			janelaResize(hwnd, lp);
+			formasResize(hwnd, lp);
+			PostMessage(hwnd, WM_PAINT, 0, 0);
 			break;
 
 		case WM_DESTROY:
