@@ -1,37 +1,34 @@
 #ifndef JANELA_H
 #define JANELA_H
-
 // Colocar o código aqui
+HWND campo_de_botoes;
 
 void ConstroiBotoes(HWND hwnd){
-	/*HWND campo_de_botoes = CreateWindow(
-		"Button",
+	campo_de_botoes = CreateWindow(
+		"STATIC",
 		"Caixa de botões",
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
-	    50,		// posição x
-	    60,		// posição y
-	    50,	// tamanho x
-	    50,	// tamanho y
+	    0,		// posição x
+	    0,		// posição y
+	    300,	// tamanho x
+	    200,	// tamanho y
 	    hwnd,
 	    (HMENU)0,
 	    NULL,
 	    NULL
 	);
-	campo_de_botoes;*/
 	
-	/*CreateWindow(
-	    "Button",
-	    "Botão",	// Botão
-	    WS_VISIBLE | WS_CHILD | WS_BORDER,
-	    10,		// posição x
-	    60,		// posição y
-	    400,	// tamanho x
-	    20,	// tamanho y
-	    hwnd,
-	    (HMENU)0,
-	    NULL,
-	    NULL
-	);*/
+}
+	void janelaResize(HWND hwnd, LPARAM lp){
+		SetWindowPos(
+				campo_de_botoes, 
+				NULL,
+				0,
+				0,
+				LOWORD(lp) / 3,
+				HIWORD(lp),
+				NULL
+			);
 }
 
 

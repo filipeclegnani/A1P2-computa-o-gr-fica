@@ -22,12 +22,13 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	RegisterClass(&wc);
 	HWND hwnd =	CreateWindow(
 	                wc.lpszClassName,
-	                "My OpenGL App",
+	                "Formas",
 	                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 	                0, 0, 800, 600,
 	                NULL, NULL, NULL, NULL
 	            );
 	HDC dc;
+	// criar window das formas e trocar o hwnd
 	dc = GetDC(hwnd);
 	PIXELFORMATDESCRIPTOR pfd;
 	pfd.nSize = sizeof(pfd);
@@ -43,7 +44,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	}
 	if(SetPixelFormat(dc, pf, &pfd) == FALSE){
 		MessageBox(NULL, "SetPixelFormat(dc, pf, &pfd)", "ERRO", MB_OK);
-		return 0;
+		return GetLastError();
 	}
 	DescribePixelFormat(dc, pf, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
 	
@@ -70,15 +71,17 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
 		case WM_CREATE:
 			ConstroiBotoes(hwnd);
+			ConstroiBotoes(hwnd);
 			break;
 			
 		case WM_PAINT:
+			//draw();
 			break;
 			
 		case WM_SIZE:
 			glViewport(0, 0, LOWORD(lp), HIWORD(lp));
 			PostMessage(hwnd, WM_PAINT, 0, 0);
-			
+			janelaResize(hwnd, lp);
 			break;
 
 		case WM_DESTROY:
