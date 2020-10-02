@@ -4,7 +4,22 @@
 // Colocar o código aqui
 
 void ConstroiBotoes(HWND hwnd){
-	CreateWindow(
+	/*HWND campo_de_botoes = CreateWindow(
+		"Button",
+		"Caixa de botões",
+	    WS_VISIBLE | WS_CHILD | WS_BORDER,
+	    50,		// posição x
+	    60,		// posição y
+	    50,	// tamanho x
+	    50,	// tamanho y
+	    hwnd,
+	    (HMENU)0,
+	    NULL,
+	    NULL
+	);
+	campo_de_botoes;*/
+	
+	/*CreateWindow(
 	    "Button",
 	    "Botão",	// Botão
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -16,7 +31,7 @@ void ConstroiBotoes(HWND hwnd){
 	    (HMENU)0,
 	    NULL,
 	    NULL
-	);
+	);*/
 }
 
 

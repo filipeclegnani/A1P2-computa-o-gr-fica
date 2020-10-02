@@ -69,6 +69,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 	switch (msg) {
 
 		case WM_CREATE:
+			ConstroiBotoes(hwnd);
 			break;
 			
 		case WM_PAINT:
