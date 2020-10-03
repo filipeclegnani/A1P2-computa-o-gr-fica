@@ -70,7 +70,9 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 			formasResize(hwnd, lp);
 			PostMessage(hwnd, WM_PAINT, 0, 0);
 			break;
-
+		case WM_COMMAND:
+			botaoPressionado(wp);
+			break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			return 0;
@@ -79,6 +81,21 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 	return DefWindowProc(hwnd, msg, wp, lp);
 }
 
+
+void botaoPressionado(WPARAM wParam){
+	// adicionar nesse switch oo eventos disparados por bot~oes
+	switch(wParam){
+		case EVT_ADDTriangulo:
+			
+		break;
+		case EVT_ADDRetangulo:
+			
+		break;
+		case EVT_ADDCirculo:
+			
+		break;
+	}
+}
 
 void draw(){
 	// desenha triangulo
