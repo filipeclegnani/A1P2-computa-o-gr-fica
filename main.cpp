@@ -10,7 +10,7 @@
 
 
 void draw();
-
+void botaoPressionado(WPARAM wParam);
 
 LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
 
