@@ -12,6 +12,7 @@ HWND campo_de_botoes;
 void initriangulo(HWND hwnd);
 void iniretangulo(HWND hwnd);
 void inicirculo(HWND hwnd);
+void initranslacao(HWND hwnd);
 int intbypercent(LONG max, float percent);
 
 void ConstroiBotoes(HWND hwnd){
@@ -35,6 +36,7 @@ void ConstroiBotoes(HWND hwnd){
 	initriangulo(hwnd);
 	iniretangulo(hwnd);
 	inicirculo(hwnd);
+	initranslacao(hwnd);
 }
 
 void initriangulo(HWND hwnd){
@@ -115,7 +117,7 @@ void initriangulo(HWND hwnd){
     );
     CreateWindow(
 	    "Edit",	//R
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 38),		// posição x
 	    intbypercent(maxY, 4.8),		// posição y
@@ -128,7 +130,7 @@ void initriangulo(HWND hwnd){
 	);
     CreateWindow(
 	    "Edit",	//G
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 50),		// posição x
 	    intbypercent(maxY, 4.8),		// posição y
@@ -141,7 +143,7 @@ void initriangulo(HWND hwnd){
 	);
     CreateWindow(
 	    "Edit",	//B
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 62),		// posição x
 	    intbypercent(maxY, 4.8),		// posição y
@@ -246,7 +248,7 @@ void iniretangulo(HWND hwnd){
     );
     CreateWindow(
 	    "Edit",	//R
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 38),		// posição x
         intbypercent(maxY, 17.3),		// posição y
@@ -259,7 +261,7 @@ void iniretangulo(HWND hwnd){
 	);
     CreateWindow(
 	    "Edit",	//G
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 50),		// posição x
         intbypercent(maxY, 17.3),		// posição y
@@ -272,7 +274,7 @@ void iniretangulo(HWND hwnd){
 	);
     CreateWindow(
 	    "Edit",	//B
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 62),		// posição x
         intbypercent(maxY, 17.3),		// posição y
@@ -350,7 +352,7 @@ void inicirculo(HWND hwnd){
     );
     CreateWindow(
 	    "Edit",	//R
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 38),		// posição x
 	    intbypercent(maxY, 29.9),		// posição y
@@ -363,7 +365,7 @@ void inicirculo(HWND hwnd){
 	);
     CreateWindow(
 	    "Edit",	//G
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 50),		// posição x
 	    intbypercent(maxY, 29.9),		// posição y
@@ -376,7 +378,7 @@ void inicirculo(HWND hwnd){
 	);
     CreateWindow(
 	    "Edit",	//B
-	    "00",	// Caixa de texto
+	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 62),		// posição x
 	    intbypercent(maxY, 29.9),		// posição y
@@ -401,6 +403,81 @@ void inicirculo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
+}
+
+void initranslacao(HWND hwnd){
+	
+	RECT size;
+	GetWindowRect(campo_de_botoes, &size);
+	
+	LONG
+	maxX = size.right - 8,
+	maxY = size.bottom - 30;
+	
+	
+	CreateWindow(
+        "Static",
+        "Translacao",	// campo de texto
+        WS_VISIBLE | WS_CHILD,
+        intbypercent(maxX, 2),		// posição x
+        intbypercent(maxY, 39),		// posição y
+        intbypercent(maxX, 25),	// tamanho x
+        intbypercent(maxY, 3.5),		// tamanho y
+        hwnd,
+        NULL,
+        NULL,
+        NULL
+    );
+    
+    HWND hImage = CreateWindow(
+	    "Static",
+	    NULL,	// imagem
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    intbypercent(maxX, 13.5),		// posição x
+	    intbypercent(maxY, 42),		// posição y
+	    0,	// tamanho x
+	    0,	// tamanho y
+	    hwnd,
+	    NULL,
+	    NULL,
+	    NULL
+	);
+
+	HBITMAP hLogoImage = (HBITMAP)LoadImage(	// carrega o bitmap
+	                         NULL,
+	                         "img\\setac.bmp",
+	                         IMAGE_BITMAP,
+	                         30,
+							 30,
+	                         LR_LOADFROMFILE
+	                     );
+	
+	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
+	
+    hImage = CreateWindow(
+	    "Static",
+	    NULL,	// imagem
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    intbypercent(maxX, 2),		// posição x
+	    intbypercent(maxY, 47.5),		// posição y
+	    0,	// tamanho x
+	    0,	// tamanho y
+	    hwnd,
+	    NULL,
+	    NULL,
+	    NULL
+	);
+
+	hLogoImage = (HBITMAP)LoadImage(	// carrega o bitmap
+	                         NULL,
+	                         "img\\setae.bmp",
+	                         IMAGE_BITMAP,
+	                         30,
+							 30,
+	                         LR_LOADFROMFILE
+	                     );
+	
+	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
 }
 
 
