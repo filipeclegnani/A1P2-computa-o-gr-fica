@@ -56,13 +56,15 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 	switch (msg) {
 
 		case WM_CREATE:
+			ConstroiCFormas(hwnd);
 			ConstroiBotoes(hwnd);
-			//formasResize(hwnd, lp);
+			formasResize(hwnd, lp);
 			break;
 			
 		
 		case WM_PAINT:
 			//draw();
+			quadrado();
 			break;
 			
 		case WM_SIZE:

@@ -60,5 +60,26 @@ void formasResize(HWND hwnd, LPARAM lp){
 	glViewport(0, 0, (LOWORD(lp) / 3)*2, HIWORD(lp));
 }
 
+void quadrado(){
+ 	
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+//	gluOrtho2D(-50, 50, -50, 50);
+	// de -50 a 50
+	glTranslatef(0.0, 0.0, 0.0); //translacao 
+//	glScalef(0, 0, 0); // escala
+	glRotatef( 0.0, 0.0, 0.0, 0.0); // rotacao eixo Z
+		
+	glBegin(GL_QUADS);
+		
+	glColor3f(0.0f, 1.0f, 1.0f);  // cor	
+	glVertex2f(-0.5, 0.5); // vertices
+	glVertex2f(0.5, 0.5);
+	glVertex2f(0.5, -0.5);
+	glVertex2f(-0.5, -0.5);
+	
+	glEnd();
+	glFlush();
+ } 
 
 #endif // deve ser a ultima linha do arquivo
