@@ -21,6 +21,27 @@
 
 HWND campo_de_botoes;
 
+HWND tbase;
+HWND taltura;
+HWND tred;
+HWND tgreen;
+HWND tblue;
+
+
+HWND qbase;
+HWND qaltura;
+HWND qred;
+HWND qgreen;
+HWND qblue;
+
+
+HWND craio;
+HWND cred;
+HWND cgren;
+HWND cblue;
+
+
+
 void initriangulo(HWND hwnd);
 void iniretangulo(HWND hwnd);
 void inicirculo(HWND hwnd);
@@ -77,7 +98,7 @@ void initriangulo(HWND hwnd){
         NULL,
         NULL
     );
-    CreateWindow(
+    tbase=CreateWindow(
 	    "Edit",
 	    "",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -104,7 +125,7 @@ void initriangulo(HWND hwnd){
         NULL,
         NULL
     );
-    CreateWindow(
+    taltura=CreateWindow(
 	    "Edit",
 	    "",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -131,7 +152,7 @@ void initriangulo(HWND hwnd){
         NULL,
         NULL
     );
-    CreateWindow(
+    tred=CreateWindow(
 	    "Edit",	//R
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -144,7 +165,7 @@ void initriangulo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    CreateWindow(
+    tgreen=CreateWindow(
 	    "Edit",	//G
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -157,7 +178,7 @@ void initriangulo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    CreateWindow(
+    tblue=CreateWindow(
 	    "Edit",	//B
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -208,7 +229,7 @@ void iniretangulo(HWND hwnd){
         NULL,
         NULL
     );
-    CreateWindow(
+    qbase=CreateWindow(
 	    "Edit",
 	    "",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -235,7 +256,7 @@ void iniretangulo(HWND hwnd){
         NULL,
         NULL
     );
-    CreateWindow(
+    qaltura=CreateWindow(
 	    "Edit",
 	    "",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -262,7 +283,7 @@ void iniretangulo(HWND hwnd){
         NULL,
         NULL
     );
-    CreateWindow(
+    qred=CreateWindow(
 	    "Edit",	//R
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -275,7 +296,7 @@ void iniretangulo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    CreateWindow(
+    qgreen=CreateWindow(
 	    "Edit",	//G
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -288,7 +309,7 @@ void iniretangulo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    CreateWindow(
+    qblue=CreateWindow(
 	    "Edit",	//B
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -339,7 +360,7 @@ void inicirculo(HWND hwnd){
         NULL,
         NULL
     );
-    CreateWindow(
+    craio=CreateWindow(
 	    "Edit",
 	    "",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -366,7 +387,7 @@ void inicirculo(HWND hwnd){
         NULL,
         NULL
     );
-    CreateWindow(
+    qred=CreateWindow(
 	    "Edit",	//R
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -379,7 +400,7 @@ void inicirculo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    CreateWindow(
+    qgreen=CreateWindow(
 	    "Edit",	//G
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -392,7 +413,7 @@ void inicirculo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    CreateWindow(
+    qblue=CreateWindow(
 	    "Edit",	//B
 	    "000",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
