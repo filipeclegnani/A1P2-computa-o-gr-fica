@@ -11,6 +11,12 @@
 #define EVT_MOVEsquerda		7
 #define EVT_MOVDireita		8
 
+#define EVT_ESCMais			9
+#define EVT_ESCMenos		10
+
+#define EVT_RTTHorario		11
+#define EVT_RTTAntihorario	12
+
 
 
 HWND campo_de_botoes;
@@ -448,7 +454,7 @@ void initranslacao(HWND hwnd){
 	    0,	// tamanho x
 	    0,	// tamanho y
 	    hwnd,
-	    NULL,
+	    (HMENU)EVT_MOVCima,
 	    NULL,
 	    NULL
 	);
@@ -473,7 +479,7 @@ void initranslacao(HWND hwnd){
 	    0,	// tamanho x
 	    0,	// tamanho y
 	    hwnd,
-	    NULL,
+	    (HMENU)EVT_MOVEsquerda,
 	    NULL,
 	    NULL
 	);
@@ -498,7 +504,7 @@ void initranslacao(HWND hwnd){
 	    0,	// tamanho x
 	    0,	// tamanho y
 	    hwnd,
-	    NULL,
+	    (HMENU)EVT_MOVDireita,
 	    NULL,
 	    NULL
 	);
@@ -523,7 +529,7 @@ void initranslacao(HWND hwnd){
 	    0,	// tamanho x
 	    0,	// tamanho y
 	    hwnd,
-	    NULL,
+	    (HMENU)EVT_MOVBaixo,
 	    NULL,
 	    NULL
 	);
@@ -572,7 +578,7 @@ void iniescala(HWND hwnd){
 	    0,	// tamanho x
 	    0,	// tamanho y
 	    hwnd,
-	    NULL,
+	    (HMENU)EVT_ESCMenos,
 	    NULL,
 	    NULL
 	);
@@ -597,7 +603,7 @@ void iniescala(HWND hwnd){
 	    0,	// tamanho x
 	    0,	// tamanho y
 	    hwnd,
-	    NULL,
+	    (HMENU)EVT_ESCMais,
 	    NULL,
 	    NULL
 	);
@@ -646,7 +652,7 @@ void inirotacao(HWND hwnd){
 	    0,	// tamanho x
 	    0,	// tamanho y
 	    hwnd,
-	    NULL,
+	    (HMENU)EVT_RTTHorario,
 	    NULL,
 	    NULL
 	);
@@ -671,7 +677,7 @@ void inirotacao(HWND hwnd){
 	    0,	// tamanho x
 	    0,	// tamanho y
 	    hwnd,
-	    NULL,
+	    (HMENU)EVT_RTTAntihorario,
 	    NULL,
 	    NULL
 	);
@@ -688,6 +694,7 @@ void inirotacao(HWND hwnd){
 	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
 }
 
+/*
 void janelaResize(HWND hwnd, LPARAM lp){
 	SetWindowPos(
 			campo_de_botoes, 
@@ -699,7 +706,7 @@ void janelaResize(HWND hwnd, LPARAM lp){
 			NULL
 		);
 }
-
+*/
 
 int intbypercent(LONG max, float percent){
 	percent = percent / 100;
