@@ -82,4 +82,17 @@ void quadrado(){
 	glFlush();
  } 
 
+void triangulo(){
+	// desenha triangulo
+	glClear(GL_COLOR_BUFFER_BIT);
+	glTranslatef(0.0, 0.0, 0.0); //translacao 
+	glScalef(0, 0, 0); // escala
+	glRotatef( 0.0, 0.0, 0.0, 0.0); // rotacao eixo Z
+	glBegin(GL_TRIANGLES);
+	glVertex2i(0, 1);
+	glVertex2i(1, -1);
+	glVertex2i(-1, -1);
+	glEnd();
+	glFlush();
+}
 #endif // deve ser a ultima linha do arquivo

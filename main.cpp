@@ -64,6 +64,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 		
 		case WM_PAINT:
 			//draw();
+			triangulo();
 			quadrado();
 			break;
 			
@@ -101,20 +102,7 @@ void botaoPressionado(WPARAM wParam){
 	}
 }
 
-void draw(){
-	// desenha triangulo
-	glClear(GL_COLOR_BUFFER_BIT);
-	glBegin(GL_TRIANGLES);
-	glColor3f(0.0f, 0.0f, 0.0f);
-	glVertex2i(0, 1);
-	glColor3f(0.5f, 0.5f, 0.5f);
-	glVertex2i(1, -1);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glVertex2i(-1, -1);
-	glEnd();
-	glFlush();
-	return ;
-}
+
 
 
 
