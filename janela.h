@@ -2,9 +2,15 @@
 #define JANELA_H
 // Colocar o código aqui
 
-#define EVT_ADDTriangulo	5
-#define EVT_ADDRetangulo	6
-#define EVT_ADDCirculo		7
+#define EVT_ADDTriangulo	1
+#define EVT_ADDRetangulo	2
+#define EVT_ADDCirculo		3
+
+#define EVT_MOVCima			5
+#define EVT_MOVBaixo		6
+#define EVT_MOVEsquerda		7
+#define EVT_MOVDireita		8
+
 
 
 HWND campo_de_botoes;
@@ -13,6 +19,8 @@ void initriangulo(HWND hwnd);
 void iniretangulo(HWND hwnd);
 void inicirculo(HWND hwnd);
 void initranslacao(HWND hwnd);
+void iniescala(HWND hwnd);
+void inirotacao(HWND hwnd);
 int intbypercent(LONG max, float percent);
 
 void ConstroiBotoes(HWND hwnd){
@@ -37,6 +45,8 @@ void ConstroiBotoes(HWND hwnd){
 	iniretangulo(hwnd);
 	inicirculo(hwnd);
 	initranslacao(hwnd);
+	iniescala(hwnd);
+	inirotacao(hwnd);
 }
 
 void initriangulo(HWND hwnd){
@@ -478,8 +488,205 @@ void initranslacao(HWND hwnd){
 	                     );
 	
 	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
+	
+	hImage = CreateWindow(
+	    "Static",
+	    NULL,	// imagem
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    intbypercent(maxX, 25),		// posição x
+	    intbypercent(maxY, 47.5),		// posição y
+	    0,	// tamanho x
+	    0,	// tamanho y
+	    hwnd,
+	    NULL,
+	    NULL,
+	    NULL
+	);
+
+	hLogoImage = (HBITMAP)LoadImage(	// carrega o bitmap
+	                         NULL,
+	                         "img\\setad.bmp",
+	                         IMAGE_BITMAP,
+	                         30,
+							 30,
+	                         LR_LOADFROMFILE
+	                     );
+	
+	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
+	
+	hImage = CreateWindow(
+	    "Static",
+	    NULL,	// imagem
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    intbypercent(maxX, 13.5),		// posição x
+	    intbypercent(maxY, 47.5),		// posição y
+	    0,	// tamanho x
+	    0,	// tamanho y
+	    hwnd,
+	    NULL,
+	    NULL,
+	    NULL
+	);
+
+	hLogoImage = (HBITMAP)LoadImage(	// carrega o bitmap
+	                         NULL,
+	                         "img\\setab.bmp",
+	                         IMAGE_BITMAP,
+	                         30,
+							 30,
+	                         LR_LOADFROMFILE
+	                     );
+	
+	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
 }
 
+void iniescala(HWND hwnd){
+	
+	RECT size;
+	GetWindowRect(campo_de_botoes, &size);
+	
+	LONG
+	maxX = size.right - 8,
+	maxY = size.bottom - 30;
+	
+	CreateWindow(
+        "Static",
+        "Escala",					// campo de texto
+        WS_VISIBLE | WS_CHILD,
+        intbypercent(maxX, 40),		// posição x
+        intbypercent(maxY, 39),		// posição y
+        intbypercent(maxX, 25),		// tamanho x
+        intbypercent(maxY, 3.5),		// tamanho y
+        hwnd,
+        NULL,
+        NULL,
+        NULL
+    );
+    
+    HWND hImage = CreateWindow(
+	    "Static",
+	    NULL,	// imagem
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    intbypercent(maxX, 42),		// posição x
+	    intbypercent(maxY, 47.5),		// posição y
+	    0,	// tamanho x
+	    0,	// tamanho y
+	    hwnd,
+	    NULL,
+	    NULL,
+	    NULL
+	);
+
+	HBITMAP hLogoImage = (HBITMAP)LoadImage(	// carrega o bitmap
+	                         NULL,
+	                         "img\\menos.bmp",
+	                         IMAGE_BITMAP,
+	                         30,
+							 30,
+	                         LR_LOADFROMFILE
+	                     );
+	
+	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
+	
+	hImage = CreateWindow(
+	    "Static",
+	    NULL,	// imagem
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    intbypercent(maxX, 42),		// posição x
+	    intbypercent(maxY, 42),		// posição y
+	    0,	// tamanho x
+	    0,	// tamanho y
+	    hwnd,
+	    NULL,
+	    NULL,
+	    NULL
+	);
+
+	hLogoImage = (HBITMAP)LoadImage(	// carrega o bitmap
+	                         NULL,
+	                         "img\\mais.bmp",
+	                         IMAGE_BITMAP,
+	                         30,
+							 30,
+	                         LR_LOADFROMFILE
+	                     );
+	
+	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
+}
+
+void inirotacao(HWND hwnd){
+	
+	RECT size;
+	GetWindowRect(campo_de_botoes, &size);
+	
+	LONG
+	maxX = size.right - 8,
+	maxY = size.bottom - 30;
+	
+	CreateWindow(
+        "Static",
+        "Rotacao",					// campo de texto
+        WS_VISIBLE | WS_CHILD,
+        intbypercent(maxX, 65),		// posição x
+        intbypercent(maxY, 39),		// posição y
+        intbypercent(maxX, 20),		// tamanho x
+        intbypercent(maxY, 3.5),		// tamanho y
+        hwnd,
+        NULL,
+        NULL,
+        NULL
+    );
+    
+    HWND hImage = CreateWindow(
+	    "Static",
+	    NULL,	// imagem
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    intbypercent(maxX, 69),		// posição x
+	    intbypercent(maxY, 42),		// posição y
+	    0,	// tamanho x
+	    0,	// tamanho y
+	    hwnd,
+	    NULL,
+	    NULL,
+	    NULL
+	);
+
+	HBITMAP hLogoImage = (HBITMAP)LoadImage(	// carrega o bitmap
+	                         NULL,
+	                         "img\\horario.bmp",
+	                         IMAGE_BITMAP,
+	                         30,
+							 30,
+	                         LR_LOADFROMFILE
+	                     );
+	
+	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
+    
+    hImage = CreateWindow(
+	    "Static",
+	    NULL,	// imagem
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    intbypercent(maxX, 69),		// posição x
+	    intbypercent(maxY, 47.5),		// posição y
+	    0,	// tamanho x
+	    0,	// tamanho y
+	    hwnd,
+	    NULL,
+	    NULL,
+	    NULL
+	);
+
+	hLogoImage = (HBITMAP)LoadImage(	// carrega o bitmap
+	                         NULL,
+	                         "img\\anti-horario.bmp",
+	                         IMAGE_BITMAP,
+	                         30,
+							 30,
+	                         LR_LOADFROMFILE
+	                     );
+	
+	SendMessage(hImage, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hLogoImage);
+}
 
 void janelaResize(HWND hwnd, LPARAM lp){
 	SetWindowPos(

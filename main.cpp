@@ -67,8 +67,11 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 			quadrado();
 			break;
 			
+		case WM_MOUSEMOVE:
+			SetCursor(LoadCursor(NULL, IDC_ARROW));
+			break;
 		case WM_SIZE:
-			//janelaResize(hwnd, lp);
+			janelaResize(hwnd, lp);
 			formasResize(hwnd, lp);
 			PostMessage(hwnd, WM_PAINT, 0, 0);
 			break;
