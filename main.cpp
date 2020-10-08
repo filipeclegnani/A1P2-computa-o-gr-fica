@@ -28,10 +28,10 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	                wc.lpszClassName,
 	                "Formas",
 	                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-	                0, 
-					0, 
-					800, 
-					600,
+	                0,
+	                0,
+	                800,
+	                600,
 	                NULL, NULL, NULL, NULL
 	            );
 	//if(int i = ConstroiCFormas(hwnd)){
@@ -39,8 +39,8 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 	//}else{
 	//	ShowWindow(hwnd, ncmdshow);
 	//}
-	
-	
+
+
 	MSG msg = {};
 
 	while(GetMessage(&msg, NULL, 0, 0)) {
@@ -60,14 +60,13 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 			ConstroiBotoes(hwnd);
 			formasResize(hwnd, lp);
 			break;
-			
-		
+
+
 		case WM_PAINT:
-			//draw();
-			triangulo();
-			quadrado();
+			glMatrixMode(GL_MODELVIEW);
+			glLoadIdentity();
 			break;
-			
+
 		case WM_MOUSEMOVE:
 			SetCursor(LoadCursor(NULL, IDC_ARROW));
 			break;
@@ -86,19 +85,54 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 	return DefWindowProc(hwnd, msg, wp, lp);
 }
 
+void redesenha() {
+	glPopMatrix();
+	glFlush();
+	glEnd();
+}
 
-void botaoPressionado(WPARAM wParam){
+void botaoPressionado(WPARAM wParam) {
 	// adicionar nesse switch oo eventos disparados por bot~oes
-	switch(wParam){
+	switch(wParam) {
 		case EVT_ADDTriangulo:
-			
-		break;
+			triangulo();
+			break;
 		case EVT_ADDRetangulo:
-			
-		break;
+			quadrado();
+			break;
 		case EVT_ADDCirculo:
-			
-		break;
+			circulo();
+			break;
+		case EVT_RTTAntihorario:
+			glMatrixMode(GL_MODELVIEW);
+			glLoadIdentity();
+			glTranslatef (0.0, 0.0, -5.0);
+			break;
+		case EVT_RTTHorario:
+
+			break;
+		case EVT_ESCMais:
+			escala = escala + 0.1;
+			redesenha();
+			break;
+		case EVT_ESCMenos:
+			escala = escala - 1;
+			redesenha();
+			//MessageBox(NULL, "Hello", "Caption", MB_OK);
+
+			break;
+		case EVT_MOVBaixo:
+
+			break;
+		case EVT_MOVCima:
+
+			break;
+		case EVT_MOVDireita:
+
+			break;
+		case EVT_MOVEsquerda:
+
+			break;
 	}
 }
 

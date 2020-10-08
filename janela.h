@@ -37,7 +37,7 @@ HWND qblue;
 
 HWND craio;
 HWND cred;
-HWND cgren;
+HWND cgreen;
 HWND cblue;
 
 
@@ -154,7 +154,7 @@ void initriangulo(HWND hwnd){
     );
     tred=CreateWindow(
 	    "Edit",	//R
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 38),		// posição x
 	    intbypercent(maxY, 4.8),		// posição y
@@ -167,7 +167,7 @@ void initriangulo(HWND hwnd){
 	);
     tgreen=CreateWindow(
 	    "Edit",	//G
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 50),		// posição x
 	    intbypercent(maxY, 4.8),		// posição y
@@ -180,7 +180,7 @@ void initriangulo(HWND hwnd){
 	);
     tblue=CreateWindow(
 	    "Edit",	//B
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 62),		// posição x
 	    intbypercent(maxY, 4.8),		// posição y
@@ -229,7 +229,7 @@ void iniretangulo(HWND hwnd){
         NULL,
         NULL
     );
-    qbase=CreateWindow(
+    qbase = CreateWindow(
 	    "Edit",
 	    "",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -256,7 +256,7 @@ void iniretangulo(HWND hwnd){
         NULL,
         NULL
     );
-    qaltura=CreateWindow(
+    qaltura = CreateWindow(
 	    "Edit",
 	    "",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
@@ -283,9 +283,9 @@ void iniretangulo(HWND hwnd){
         NULL,
         NULL
     );
-    qred=CreateWindow(
+    qred = CreateWindow(
 	    "Edit",	//R
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 38),		// posição x
         intbypercent(maxY, 17.3),		// posição y
@@ -296,9 +296,9 @@ void iniretangulo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    qgreen=CreateWindow(
+    qgreen = CreateWindow(
 	    "Edit",	//G
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 50),		// posição x
         intbypercent(maxY, 17.3),		// posição y
@@ -309,9 +309,9 @@ void iniretangulo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    qblue=CreateWindow(
+    qblue = CreateWindow(
 	    "Edit",	//B
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 62),		// posição x
         intbypercent(maxY, 17.3),		// posição y
@@ -387,9 +387,9 @@ void inicirculo(HWND hwnd){
         NULL,
         NULL
     );
-    qred=CreateWindow(
+    cred=CreateWindow(
 	    "Edit",	//R
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 38),		// posição x
 	    intbypercent(maxY, 29.9),		// posição y
@@ -400,9 +400,9 @@ void inicirculo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    qgreen=CreateWindow(
+    cgreen=CreateWindow(
 	    "Edit",	//G
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 50),		// posição x
 	    intbypercent(maxY, 29.9),		// posição y
@@ -413,9 +413,9 @@ void inicirculo(HWND hwnd){
 	    NULL,
 	    NULL
 	);
-    qblue=CreateWindow(
+    cblue=CreateWindow(
 	    "Edit",	//B
-	    "000",	// Caixa de texto
+	    "50",	// Caixa de texto
 	    WS_VISIBLE | WS_CHILD | WS_BORDER,
 	    intbypercent(maxX, 62),		// posição x
 	    intbypercent(maxY, 29.9),		// posição y
@@ -593,7 +593,7 @@ void iniescala(HWND hwnd){
     HWND hImage = CreateWindow(
 	    "Static",
 	    NULL,	// imagem
-	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP | SS_NOTIFY,
 	    intbypercent(maxX, 42),		// posição x
 	    intbypercent(maxY, 47.5),		// posição y
 	    0,	// tamanho x
@@ -618,7 +618,7 @@ void iniescala(HWND hwnd){
 	hImage = CreateWindow(
 	    "Static",
 	    NULL,	// imagem
-	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP | SS_NOTIFY,
 	    intbypercent(maxX, 42),		// posição x
 	    intbypercent(maxY, 42),		// posição y
 	    0,	// tamanho x
