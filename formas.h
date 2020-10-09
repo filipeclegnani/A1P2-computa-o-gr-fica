@@ -22,7 +22,6 @@ struct FORMA {
 };
 struct FORMA form;
 
-int ultimoid = 1;
 
 typedef struct {
 	float translacaoX;
@@ -41,6 +40,9 @@ typedef struct {
 	float angulo;
 	int id;
 	float escala;
+	float rotacao;
+	float tranlacaox;
+	float tranlacaoy;
 } CIRCULOS;
 
 typedef struct {
@@ -53,6 +55,9 @@ typedef struct {
 	float base;
 	float altura;
 } t_triangulo;
+
+
+int ultimoid = 1;
 
 int qtdci = 1;
 CIRCULOS circulos[100];
@@ -67,9 +72,9 @@ int ConstroiCFormas(HWND hwnd) {
 	                      "STATIC",
 	                      "Fórmas",
 	                      WS_VISIBLE | WS_CHILD | WS_BORDER,
-	                      X_WINDOWSIZE / 3,		// posição x
+	                      300,		// posição x
 	                      0,		// posição y
-	                      (X_WINDOWSIZE / 3)*2,	// tamanho x
+	                      X_WINDOWSIZE,	// tamanho x
 	                      Y_WINDOWSIZE,	// tamanho y
 	                      hwnd,
 	                      (HMENU)0,
@@ -192,7 +197,7 @@ void triangulo(t_triangulo t) {
 	// desenha triangulo
 	glTranslatef(t.gl_translatex, t.gl_translatey, 0.0); //translacao
 	glScalef(t.gl_scale, t.gl_scale, 0); // escala
-	glRotatef( 0.0, 0.0, 0.0, t.gl_rotate); // rotacao eixo Z
+	glRotatef(-t.gl_rotate, 0.0, 0.0, 1.0);
 	glBegin(GL_TRIANGLES);
 
 	glColor3f(t.cor.R, t.cor.G, t.cor.B);
@@ -210,24 +215,24 @@ void circulo(CIRCULOS c) {
 	GLfloat vertices = 1000;
 	GLfloat angulo;
 	glScalef(c.escala, c.escala, 0);
+	glRotatef(-c.rotacao, 0.0, 0.0, 1.0);
 	
 	glBegin(GL_POLYGON);
 	glColor3f(c.cor.R, c.cor.G, c.cor.B);
 	for(int i=0; i < vertices; i++) {
 		angulo = 2 * PI * i / vertices;
-		glVertex2f(cos(angulo)*(c.raio),sin(angulo)*(c.raio));
+		glVertex2f(
+		    cos(angulo) * (c.raio),
+		    sin(angulo) * (c.raio));
 	}
 	glEnd();
 	glFlush();
 }
 
 void quadrado(quads q) {
-
-	//glClear(GL_COLOR_BUFFER_BIT);
-
 	glTranslatef(q.translacaoX, q.translacaoY, 0.0); //translacao
 	glScalef(q.escala, q.escala, 1); // escala
-	glRotatef(0.0, 0.0, 0.0, q.rotacaoZ); // rotacao eixo Z
+	glRotatef(-q.rotacaoZ, 0.0, 0.0, 1.0); // rotacao eixo Z
 
 	glBegin(GL_QUADS);
 
@@ -243,10 +248,13 @@ void quadrado(quads q) {
 void add_triangulo() {
 	triangulos[qtdtr].id = ultimoid;
 	triangulos[qtdtr].cor = getcolor(1);
+
 	FORMA fr = recebeForm(taltura, tbase);
+
 	triangulos[qtdtr].altura = fr.altura;
 	triangulos[qtdtr].base = fr.base;
 	triangulos[qtdtr].gl_scale = 1;
+
 	qtdtr++;
 	ultimoid++;
 }
@@ -254,10 +262,13 @@ void add_triangulo() {
 void add_quadrado() {
 	quadrados[qtdqu].id = ultimoid;
 	quadrados[qtdqu].cor = getcolor(2);
+
 	FORMA fr = recebeForm(qaltura, qbase);
+
 	quadrados[qtdqu].altura = fr.altura;
 	quadrados[qtdqu].base = fr.base;
 	quadrados[qtdqu].escala = 1;
+
 	qtdqu++;
 	ultimoid++;
 }
@@ -267,6 +278,7 @@ void add_circulo() {
 	circulos[qtdci].cor = getcolor(3);
 	circulos[qtdci].raio = receberaio();
 	circulos[qtdci].escala = 1;
+
 	qtdci++;
 	ultimoid++;
 }
@@ -276,19 +288,30 @@ void redesenhatodas() {
 	int idcirculo = 1;
 	int idquadrado = 1;
 	int idtringulo = 1;
+
 	printf("redesenhando\n");
 	glClear(GL_COLOR_BUFFER_BIT);
+
 	while(idatual < ultimoid) {
 		if(idatual == circulos[idcirculo].id) {
 			circulo(circulos[idcirculo]);
+			circulos[idcirculo].escala = 1;
+			circulos[idcirculo].tranlacaox = 0;
+			circulos[idcirculo].tranlacaoy = 0;
 			idcirculo++;
 		} else {
 			if(idatual == quadrados[idquadrado].id) {
 				quadrado(quadrados[idquadrado]);
+				quadrados[idquadrado].escala = 1;
+				quadrados[idquadrado].translacaoX = 0;
+				quadrados[idquadrado].translacaoY = 0;
 				idquadrado++;
 			} else {
 				if(idatual == triangulos[idtringulo].id) {
 					triangulo(triangulos[idtringulo]);
+					triangulos[idtringulo].gl_scale = 1;
+					triangulos[idtringulo].gl_translatex = 0;
+					triangulos[idtringulo].gl_translatey = 0;
 					idtringulo++;
 				} else {
 					printf("erro");
@@ -307,7 +330,8 @@ void lstsetescala(float i) {
 	int idcirculo = 1;
 	int idquadrado = 1;
 	int idtringulo = 1;
-	int lst;
+	int lst = 0;
+
 	while(idatual < ultimoid) {
 		if(idatual == circulos[idcirculo].id) {
 			lst = 1;
@@ -327,21 +351,115 @@ void lstsetescala(float i) {
 		}
 		idatual++;
 	}
+
 	// define
-	switch(lst){
+	switch(lst) {
 		case 1:
 			// circulo
 			circulos[idcirculo - 1].escala = circulos[idcirculo - 1].escala + i;
 			break;
 		case 2:
 			// quadrado
-			
+			quadrados[idquadrado - 1].escala = quadrados[idquadrado - 1].escala + i;
 			break;
 		case 3:
 			// triangulo
-			
+			triangulos[idtringulo - 1].gl_scale = 	triangulos[idtringulo - 1].gl_scale + i;
 			break;
 	}
 }
+
+void lstsetrotacao(float i){
+	// encontra o ultimo
+	int idatual = 1;
+	int idcirculo = 1;
+	int idquadrado = 1;
+	int idtringulo = 1;
+	int lst = 0;
+
+	while(idatual < ultimoid) {
+		if(idatual == circulos[idcirculo].id) {
+			lst = 1;
+			idcirculo++;
+		} else {
+			if(idatual == quadrados[idquadrado].id) {
+				lst = 2;
+				idquadrado++;
+			} else {
+				if(idatual == triangulos[idtringulo].id) {
+					lst = 3;
+					idtringulo++;
+				} else {
+					printf("erro");
+				}
+			}
+		}
+		idatual++;
+	}
+
+	// define
+	switch(lst) {
+		case 1:
+			// circulo
+			circulos[idcirculo - 1].rotacao = circulos[idcirculo - 1].rotacao + i;
+			break;
+		case 2:
+			// quadrado
+			quadrados[idquadrado - 1].rotacaoZ = quadrados[idquadrado - 1].rotacaoZ + i;
+			break;
+		case 3:
+			// triangulo
+			triangulos[idtringulo - 1].gl_rotate = 	triangulos[idtringulo - 1].gl_rotate + i;
+			break;
+	}
+}
+
+void lstsettranslacao(float i, float j){
+	// encontra o ultimo
+	int idatual = 1;
+	int idcirculo = 1;
+	int idquadrado = 1;
+	int idtringulo = 1;
+	int lst = 0;
+
+	while(idatual < ultimoid) {
+		if(idatual == circulos[idcirculo].id) {
+			lst = 1;
+			idcirculo++;
+		} else {
+			if(idatual == quadrados[idquadrado].id) {
+				lst = 2;
+				idquadrado++;
+			} else {
+				if(idatual == triangulos[idtringulo].id) {
+					lst = 3;
+					idtringulo++;
+				} else {
+					printf("erro");
+				}
+			}
+		}
+		idatual++;
+	}
+
+	// define
+	switch(lst) {
+		case 1:
+			// circulo
+			circulos[idcirculo - 1].tranlacaox = circulos[idcirculo - 1].tranlacaox + i;
+			circulos[idcirculo - 1].tranlacaoy = circulos[idcirculo - 1].tranlacaoy + j;
+			break;
+		case 2:
+			// quadrado
+			quadrados[idquadrado - 1].translacaoX = quadrados[idquadrado - 1].translacaoX + i;
+			quadrados[idquadrado - 1].translacaoY = quadrados[idquadrado - 1].translacaoY + j;
+			break;
+		case 3:
+			// triangulo
+			triangulos[idtringulo - 1].gl_translatex = 	triangulos[idtringulo - 1].gl_translatex + i;
+			triangulos[idtringulo - 1].gl_translatey = 	triangulos[idtringulo - 1].gl_translatey + j;
+			break;
+	}
+} 
 
 #endif // deve ser a ultima linha do arquivo

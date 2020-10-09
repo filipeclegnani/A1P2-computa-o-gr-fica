@@ -64,7 +64,8 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
 		case WM_PAINT:
 			
-			redesenhatodas();
+			
+			//redesenhatodas();
 			break;
 
 		case WM_MOUSEMOVE:
@@ -72,6 +73,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 			break;
 		case WM_SIZE:
 			formasResize(hwnd, lp);
+			redesenhatodas();
 			PostMessage(hwnd, WM_PAINT, 0, 0);
 			break;
 		case WM_COMMAND:
@@ -99,28 +101,30 @@ void botaoPressionado(WPARAM wParam) {
 			add_circulo();
 			break;
 		case EVT_RTTAntihorario:
-
+			printf("anti\n");
+			lstsetrotacao(-.1f);
 			break;
 		case EVT_RTTHorario:
-
+			printf("horario\n");
+			lstsetrotacao(.1f);
 			break;
 		case EVT_ESCMais:
-			lstsetescala(1.0f);
+			lstsetescala(.5f);
 			break;
 		case EVT_ESCMenos:
-			lstsetescala(-1.0f);
+			lstsetescala(-.5f);
 			break;
 		case EVT_MOVBaixo:
-
+			lstsettranslacao(0.0f, -0.1f);
 			break;
 		case EVT_MOVCima:
-
+			lstsettranslacao(0.0f, 0.1f);
 			break;
 		case EVT_MOVDireita:
-
+			lstsettranslacao(0.1f, 0.0f);
 			break;
 		case EVT_MOVEsquerda:
-
+			lstsettranslacao(-0.1f, 0.0f);
 			break;
 	}
 	
