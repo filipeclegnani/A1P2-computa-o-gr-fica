@@ -469,7 +469,7 @@ void initranslacao(HWND hwnd){
     HWND hImage = CreateWindow(
 	    "Static",
 	    NULL,	// imagem
-	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP | SS_NOTIFY,
 	    intbypercent(maxX, 13.5),		// posição x
 	    intbypercent(maxY, 42),		// posição y
 	    0,	// tamanho x
@@ -494,7 +494,7 @@ void initranslacao(HWND hwnd){
     hImage = CreateWindow(
 	    "Static",
 	    NULL,	// imagem
-	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP | SS_NOTIFY,
 	    intbypercent(maxX, 2),		// posição x
 	    intbypercent(maxY, 47.5),		// posição y
 	    0,	// tamanho x
@@ -519,7 +519,7 @@ void initranslacao(HWND hwnd){
 	hImage = CreateWindow(
 	    "Static",
 	    NULL,	// imagem
-	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP | SS_NOTIFY,
 	    intbypercent(maxX, 25),		// posição x
 	    intbypercent(maxY, 47.5),		// posição y
 	    0,	// tamanho x
@@ -544,7 +544,7 @@ void initranslacao(HWND hwnd){
 	hImage = CreateWindow(
 	    "Static",
 	    NULL,	// imagem
-	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP | SS_NOTIFY,
 	    intbypercent(maxX, 13.5),		// posição x
 	    intbypercent(maxY, 47.5),		// posição y
 	    0,	// tamanho x
@@ -667,7 +667,7 @@ void inirotacao(HWND hwnd){
     HWND hImage = CreateWindow(
 	    "Static",
 	    NULL,	// imagem
-	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP | SS_NOTIFY,
 	    intbypercent(maxX, 69),		// posição x
 	    intbypercent(maxY, 42),		// posição y
 	    0,	// tamanho x
@@ -692,7 +692,7 @@ void inirotacao(HWND hwnd){
     hImage = CreateWindow(
 	    "Static",
 	    NULL,	// imagem
-	    WS_VISIBLE | WS_CHILD | SS_BITMAP,
+	    WS_VISIBLE | WS_CHILD | SS_BITMAP | SS_NOTIFY,
 	    intbypercent(maxX, 69),		// posição x
 	    intbypercent(maxY, 47.5),		// posição y
 	    0,	// tamanho x

@@ -63,8 +63,8 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
 
 		case WM_PAINT:
-			glMatrixMode(GL_MODELVIEW);
-			glLoadIdentity();
+			
+			redesenhatodas();
 			break;
 
 		case WM_MOUSEMOVE:
@@ -85,41 +85,30 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 	return DefWindowProc(hwnd, msg, wp, lp);
 }
 
-void redesenha() {
-	glPopMatrix();
-	glFlush();
-	glEnd();
-}
 
 void botaoPressionado(WPARAM wParam) {
 	// adicionar nesse switch oo eventos disparados por bot~oes
 	switch(wParam) {
 		case EVT_ADDTriangulo:
-			triangulo();
+			add_triangulo();
 			break;
 		case EVT_ADDRetangulo:
-			quadrado();
+			add_quadrado();
 			break;
 		case EVT_ADDCirculo:
-			circulo();
+			add_circulo();
 			break;
 		case EVT_RTTAntihorario:
-			glMatrixMode(GL_MODELVIEW);
-			glLoadIdentity();
-			glTranslatef (0.0, 0.0, -5.0);
+
 			break;
 		case EVT_RTTHorario:
 
 			break;
 		case EVT_ESCMais:
-			escala = escala + 0.1;
-			redesenha();
+			lstsetescala(1.0f);
 			break;
 		case EVT_ESCMenos:
-			escala = escala - 1;
-			redesenha();
-			//MessageBox(NULL, "Hello", "Caption", MB_OK);
-
+			lstsetescala(-1.0f);
 			break;
 		case EVT_MOVBaixo:
 
@@ -134,6 +123,8 @@ void botaoPressionado(WPARAM wParam) {
 
 			break;
 	}
+	
+	redesenhatodas();
 }
 
 

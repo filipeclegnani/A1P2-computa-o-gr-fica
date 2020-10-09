@@ -16,18 +16,51 @@ typedef struct {
 	float B;
 } COR;
 
-struct FORMA{
-    float altura;
-    float base;
+struct FORMA {
+	float altura;
+	float base;
 };
 struct FORMA form;
 
-float translacaoX;
-float translacaoY;
+int ultimoid = 1;
 
-float rotacaoZ;
+typedef struct {
+	float translacaoX;
+	float translacaoY;
+	float escala;
+	float rotacaoZ;
+	float base;
+	float altura;
+	COR cor;
+	int id;
+} quads ;
 
-float escala = 1;
+typedef struct {
+	float raio;
+	COR cor;
+	float angulo;
+	int id;
+	float escala;
+} CIRCULOS;
+
+typedef struct {
+	int id;
+	float gl_translatex;
+	float gl_translatey;
+	float gl_rotate;
+	float gl_scale;
+	COR cor;
+	float base;
+	float altura;
+} t_triangulo;
+
+int qtdci = 1;
+CIRCULOS circulos[100];
+int qtdqu = 1;
+quads quadrados[100];
+int qtdtr = 1;
+t_triangulo triangulos[100];
+
 
 int ConstroiCFormas(HWND hwnd) {
 	caixa_de_formas = CreateWindow(
@@ -127,82 +160,188 @@ COR getcolor(int id) {
 	return saida;
 }
 
-FORMA recebeForm(HWND hwnd, HWND hwnd2){
+FORMA recebeForm(HWND hwnd, HWND hwnd2) {
 
-    char cR[5];
-    char qR[5];
+	char cR[5];
+	char qR[5];
 
-    FORMA saida;
+	FORMA saida;
 
-    GetWindowTextA(hwnd, cR, 5);
-    GetWindowTextA(hwnd2, qR, 5);
+	GetWindowTextA(hwnd, cR, 5);
+	GetWindowTextA(hwnd2, qR, 5);
 
 
-    saida.altura = (float)(atoi(cR)) / 100;
-    saida.base = (float)(atoi(qR)) / 100;
+	saida.altura = (float)(atoi(cR)) / 100;
+	saida.base = (float)(atoi(qR)) / 100;
 
-    printf("%.2f %.2f\n", saida.altura, saida.base);
+	printf("%.2f %.2f\n", saida.altura, saida.base);
 
-    return saida; 
+	return saida;
 }
 
-void quadrado() {
+float receberaio() {
+	char cR[5];
 
-	//glClear(GL_COLOR_BUFFER_BIT);
+	GetWindowTextA(craio, cR, 5);
+	return  (float)(atoi(cR)) / 100;
 
-//    gluOrtho2D(-50, 50, -50, 50);
-	// de -50 a 50
-	glTranslatef(translacaoX, translacaoY, 0.0); //translacao
-    glScalef(escala, escala, 1); // escala
-	glRotatef(0.0, 0.0, 0.0, rotacaoZ); // rotacao eixo Z
+}
 
-	glBegin(GL_QUADS);
 
-	COR cl = getcolor(2);
-	glColor3f(cl.R, cl.G, cl.B);
-	glVertex2f(-0.5, 0.5); // vertices
-	glVertex2f(0.5, 0.5);
-	glVertex2f(0.5, -0.5);
-	glVertex2f(-0.5, -0.5);
-	glPushMatrix();
+void triangulo(t_triangulo t) {
+	// desenha triangulo
+	glTranslatef(t.gl_translatex, t.gl_translatey, 0.0); //translacao
+	glScalef(t.gl_scale, t.gl_scale, 0); // escala
+	glRotatef( 0.0, 0.0, 0.0, t.gl_rotate); // rotacao eixo Z
+	glBegin(GL_TRIANGLES);
+
+	glColor3f(t.cor.R, t.cor.G, t.cor.B);
+
+	glVertex2f(0, t.altura);
+	glVertex2f(t.base , (-1));
+	glVertex2f((-1) * t.base , -1);
+
 	glEnd();
 	glFlush();
 }
 
-void triangulo(){
-    // desenha triangulo
-    glPushMatrix();
-    glTranslatef(0.0, 0.0, 0.0); //translacao 
-    //glScalef(0, 0, 0); // escala
-    glRotatef( 0.0, 0.0, 0.0, 0.0); // rotacao eixo Z
-    glBegin(GL_TRIANGLES);
-    
-	COR cl = getcolor(1);
-	glColor3f(cl.R, cl.G, cl.B);
-	
-	FORMA f = recebeForm(taltura, tbase);
-    glVertex2f(0, f.altura);
-    glVertex2f(f.base , (-1));
-    glVertex2f((-1) * f.base , -1);
-    
-    glEnd();
-    glFlush();
-}
+void circulo(CIRCULOS c) {
 
-void circulo() {
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	GLfloat vertices = 10000;
+	GLfloat vertices = 1000;
 	GLfloat angulo;
-	COR cl = getcolor(3);
-	glColor3f(cl.R, cl.G, cl.B);
+	glScalef(c.escala, c.escala, 0);
+	
 	glBegin(GL_POLYGON);
-	for(int i=0; i <vertices; i++) {
+	glColor3f(c.cor.R, c.cor.G, c.cor.B);
+	for(int i=0; i < vertices; i++) {
 		angulo = 2 * PI * i / vertices;
-		glVertex2f(cos(angulo),sin(angulo));
+		glVertex2f(cos(angulo)*(c.raio),sin(angulo)*(c.raio));
 	}
 	glEnd();
 	glFlush();
+}
+
+void quadrado(quads q) {
+
+	//glClear(GL_COLOR_BUFFER_BIT);
+
+	glTranslatef(q.translacaoX, q.translacaoY, 0.0); //translacao
+	glScalef(q.escala, q.escala, 1); // escala
+	glRotatef(0.0, 0.0, 0.0, q.rotacaoZ); // rotacao eixo Z
+
+	glBegin(GL_QUADS);
+
+	glColor3f(q.cor.R, q.cor.G, q.cor.B);
+	glVertex2f(q.base, q.altura);
+	glVertex2f ((-1)* q.base, q.altura); // vertices
+	glVertex2f((-1) * q.base, (-1) * q.altura);
+	glVertex2f(q.base, (-1) * q.altura);
+	glEnd();
+	glFlush();
+}
+
+void add_triangulo() {
+	triangulos[qtdtr].id = ultimoid;
+	triangulos[qtdtr].cor = getcolor(1);
+	FORMA fr = recebeForm(taltura, tbase);
+	triangulos[qtdtr].altura = fr.altura;
+	triangulos[qtdtr].base = fr.base;
+	triangulos[qtdtr].gl_scale = 1;
+	qtdtr++;
+	ultimoid++;
+}
+
+void add_quadrado() {
+	quadrados[qtdqu].id = ultimoid;
+	quadrados[qtdqu].cor = getcolor(2);
+	FORMA fr = recebeForm(qaltura, qbase);
+	quadrados[qtdqu].altura = fr.altura;
+	quadrados[qtdqu].base = fr.base;
+	quadrados[qtdqu].escala = 1;
+	qtdqu++;
+	ultimoid++;
+}
+
+void add_circulo() {
+	circulos[qtdci].id = ultimoid;
+	circulos[qtdci].cor = getcolor(3);
+	circulos[qtdci].raio = receberaio();
+	circulos[qtdci].escala = 1;
+	qtdci++;
+	ultimoid++;
+}
+
+void redesenhatodas() {
+	int idatual = 1;
+	int idcirculo = 1;
+	int idquadrado = 1;
+	int idtringulo = 1;
+	printf("redesenhando\n");
+	glClear(GL_COLOR_BUFFER_BIT);
+	while(idatual < ultimoid) {
+		if(idatual == circulos[idcirculo].id) {
+			circulo(circulos[idcirculo]);
+			idcirculo++;
+		} else {
+			if(idatual == quadrados[idquadrado].id) {
+				quadrado(quadrados[idquadrado]);
+				idquadrado++;
+			} else {
+				if(idatual == triangulos[idtringulo].id) {
+					triangulo(triangulos[idtringulo]);
+					idtringulo++;
+				} else {
+					printf("erro");
+				}
+			}
+		}
+		glFlush();
+		glEnd();
+		idatual++;
+	}
+}
+
+void lstsetescala(float i) {
+	// encontra o ultimo
+	int idatual = 1;
+	int idcirculo = 1;
+	int idquadrado = 1;
+	int idtringulo = 1;
+	int lst;
+	while(idatual < ultimoid) {
+		if(idatual == circulos[idcirculo].id) {
+			lst = 1;
+			idcirculo++;
+		} else {
+			if(idatual == quadrados[idquadrado].id) {
+				lst = 2;
+				idquadrado++;
+			} else {
+				if(idatual == triangulos[idtringulo].id) {
+					lst = 3;
+					idtringulo++;
+				} else {
+					printf("erro");
+				}
+			}
+		}
+		idatual++;
+	}
+	// define
+	switch(lst){
+		case 1:
+			// circulo
+			circulos[idcirculo - 1].escala = circulos[idcirculo - 1].escala + i;
+			break;
+		case 2:
+			// quadrado
+			
+			break;
+		case 3:
+			// triangulo
+			
+			break;
+	}
 }
 
 #endif // deve ser a ultima linha do arquivo
