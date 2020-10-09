@@ -1,3 +1,7 @@
-# A1P2-computa-o-gr-fica
-projeto A1/2 de Computação grafica
-oioi
+# A1P2 computação gráfica
+# Alunos:
+  Dara Julia Southier, 
+  Fernanda Ferrari, 
+  Filipe Casaletti Legnani, 
+  Julia Kelly Prestes de Oliveira da Silva, 
+  Paulo Ricardo Savaris
